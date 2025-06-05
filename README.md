@@ -1,54 +1,63 @@
+# Fake News Detection via NLP & Stance Classification
 
-# Fake News Detection Using NLP & Stance Classification
+In today's digital age, the rapid dissemination of information has made distinguishing between genuine news and misinformation increasingly challenging. This project presents an AI-driven approach to detect potential fake news by analyzing the **stance** between a news headline and its corresponding article body—categorizing their relationship as *agree*, *disagree*, *discuss*, or *unrelated*.
 
-In a digital world increasingly shaped by headlines and viral content, misinformation has emerged as a serious threat to public trust and democratic discourse. This project presents a scalable AI solution that leverages natural language processing to identify inconsistencies between a headline and its corresponding article — a reliable proxy for detecting fake news.
+## Project Overview
 
-Rather than relying on binary classification, this model applies **stance detection** to classify each headline-body pair as one of four nuanced relationships: **agree**, **disagree**, **discuss**, or **unrelated**. This allows for deeper linguistic analysis and better interpretability, particularly in cases where content is misleading rather than entirely false.
+- **Objective**: Develop a stance detection model to identify inconsistencies between news headlines and article bodies, aiding in the detection of misleading or false information.
+- **Dataset**: Utilized the [Fake News Challenge (FNC-1)](https://github.com/FakeNewsChallenge/fnc-1) dataset, comprising over 50,000 headline-body pairs labeled across four stance categories.
+- **Approach**: Employed a combination of natural language processing techniques and machine learning models to analyze semantic relationships and classify stances effectively.
 
-## Why Stance Detection?
+## Methodology
 
-Traditional fake news classifiers often fall short when articles bend the truth subtly. By focusing on **semantic alignment** between headlines and article bodies, this project captures the emotional, tonal, and factual mismatches that are common in misleading content. For instance, an article body subtly refuting a sensational headline can be flagged based on a **"disagree"** stance.
+### Feature Engineering
 
-## Techniques and Tools
+- **Lexical Features**: Implemented TF-IDF vectors, n-gram overlaps, and word overlap measures to capture surface-level textual similarities.
+- **Semantic Features**: Leveraged GloVe embeddings and sentence transformers to compute cosine similarity, capturing deeper semantic relationships.
+- **Sentiment Analysis**: Analyzed polarity and subjectivity differences between headlines and article bodies to detect emotional and subjective discrepancies.
+- **Refuting Indicators**: Identified presence of refuting words (e.g., "hoax", "fake", "fraud") that often signal disagreement or misinformation.
 
-- **Dataset**: [FNC-1: Fake News Challenge](https://github.com/FakeNewsChallenge/fnc-1)  
-- **Feature Engineering**:
-  - GloVe and Sentence Transformer embeddings
-  - Cosine similarity, refuting word count
-  - Polarity and subjectivity differences
-  - TF-IDF and n-gram overlaps
-- **Models**:
-  - XGBoost (top performer)
+### Modeling Techniques
+
+- **Algorithms Used**:
+  - XGBoost
   - LightGBM
   - Random Forest
-  - Logistic Regression (baseline)
-- **Validation**: Performance validated on official FNC-1 test set
+  - Logistic Regression
+  - K-Nearest Neighbors (KNN)
+- **Evaluation Metrics**: Assessed models using accuracy, precision, recall, F1-score, and ROC-AUC to ensure robust performance across all stance categories.
 
-## 🎯 Results
+## Results
 
-- **Accuracy**: ~89% with XGBoost
-- **AUC (XGBoost)**: 0.996
-- **Robust across all stance classes**, with particularly strong results on "unrelated" and "discuss" categories
-- **High generalizability**: External test set confirmed consistency
+- **Best Model**: XGBoost achieved an accuracy of approximately 89% and an ROC-AUC of 0.996 on the FNC-1 test set.
+- **Performance Highlights**:
+  - High precision in distinguishing "unrelated" stances.
+  - Effective detection of subtle disagreements and discussions, which are often challenging to classify.
+  - Demonstrated robustness across all four stance categories, indicating a well-generalized model.
 
-## 📊 Business Relevance
+## Real-World Applications
 
-This system can support:
-- **News platforms** in pre-screening articles for editorial review
-- **Social media companies** in prioritizing moderation queues
-- **Fact-checking organizations** by clustering articles with high stance inconsistency
-- **Policy watchdogs** monitoring shifts in public discourse and media framing
+- **Media Monitoring**: Assists news organizations in flagging potentially misleading articles for editorial review.
+- **Social Media Platforms**: Enhances content moderation by identifying posts that contradict their headlines, a common trait in clickbait or fake news.
+- **Fact-Checking Organizations**: Streamlines the process of verifying news by highlighting articles with conflicting headline-body stances.
+- **Policy Makers**: Provides insights into the spread of misinformation, aiding in the development of countermeasures.
 
-By automating early detection of suspicious content, this approach helps reduce manual triage effort, enhances platform credibility, and strengthens public resilience to misinformation.
+## Personal Contributions
 
-## 👩‍💻 Role
+This project was developed encompassing the following responsibilities:
 
-This project is curated and restructured for:
-- Designing and implementing the NLP pipeline
-- Engineering semantic and lexical features
-- Training and tuning multiple classification models
-- Interpreting results through explainable AI techniques
-- Analyzing real-world business applications and deployment feasibility
+- **Data Preprocessing**: Cleaned and prepared the FNC-1 dataset for analysis.
+- **Feature Engineering**: Designed and implemented both lexical and semantic features to capture nuanced textual relationships.
+- **Model Development**: Trained and fine-tuned multiple machine learning models, selecting the most effective based on performance metrics.
+- **Evaluation & Analysis**: Conducted thorough evaluations, including confusion matrices and ROC curves, to assess model efficacy.
+- **Documentation**: Compiled comprehensive documentation to facilitate understanding and potential future enhancements.
 
-This project is an ongoing effort to explore practical, explainable, and impactful solutions to the misinformation problem — with the goal of building a more trustworthy information ecosystem.
+## 🚀 Future Enhancements
+
+- **Addressing Class Imbalance**: Implement techniques like SMOTE or focal loss to improve model performance on minority classes.
+- **Incorporating Transformer Models**: Explore advanced models like BERT or RoBERTa for potentially improved semantic understanding.
+- **Real-Time Deployment**: Develop a user-friendly interface using frameworks like Streamlit for real-time stance detection.
+- **Multimodal Analysis**: Extend the model to analyze multimedia content, such as images or videos, alongside text for a more holistic fake news detection system.
+
+This project reflects a broader interest in building practical, explainable AI systems that address societal challenges like misinformation — with applications in journalism, policy, and digital safety.
 
