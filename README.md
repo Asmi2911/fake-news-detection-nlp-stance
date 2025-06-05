@@ -42,7 +42,7 @@ In today's digital age, the rapid dissemination of information has made distingu
 - **Fact-Checking Organizations**: Streamlines the process of verifying news by highlighting articles with conflicting headline-body stances.
 - **Policy Makers**: Provides insights into the spread of misinformation, aiding in the development of countermeasures.
 
-## Personal Contributions
+## Contributions
 
 This project was developed encompassing the following responsibilities:
 
