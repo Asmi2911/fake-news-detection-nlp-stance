@@ -73,4 +73,9 @@ Visuals – Seaborn class distributions, word clouds
 | Apply Intel® Neural Compressor for post-training quantisation      | Smaller/faster models for edge     |
 | Deploy a Flask API on Intel® DevCloud                              | Real-time stance inference demo    |
 
+# Author:
+Asmita Sonavane,
+New York University,
+as20428@nyu.edu
+
 > *This project embodies the core of responsible AI — explainability, scalability, and social relevance in tackling misinformation.*
