@@ -21,7 +21,6 @@
 
 ## Environment (Conda)
 
-```bash
 # Create Intel-optimised env
 conda create -n intel-fake-news python=3.9 -y
 conda activate intel-fake-news
