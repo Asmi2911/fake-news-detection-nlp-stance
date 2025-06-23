@@ -29,8 +29,7 @@ conda activate intel-fake-news
 # Core libs + Intel® Extension for Scikit-learn
 conda install -c conda-forge \
       scikit-learn-intelex numpy pandas matplotlib seaborn \
-      lightgbm xgboost nltk wordcloud jupyterlab -y```
-The environment ships Intel® oneAPI-powered NumPy / SciPy and the Intel® Extension for Scikit-learn.
+      lightgbm xgboost nltk wordcloud jupyterlab -y
 
 
 ## Results
