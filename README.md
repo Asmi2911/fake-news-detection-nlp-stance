@@ -32,16 +32,19 @@ conda install -c conda-forge \
       lightgbm xgboost nltk wordcloud jupyterlab -y
 The environment ships Intel® oneAPI-powered NumPy / SciPy and the Intel® Extension for Scikit-learn.
 
+
 ## Results
 
-| Model         |  Accuracy | Macro F1 | Train Time | Intel Gain\*          |
+| Model         |  Accuracy | Macro F1 | Train Time | Intel Gain*           |
 | ------------- | --------: | -------: | ---------: | --------------------- |
 | **XGBoost**   | **0.926** | **0.68** | **5.68 s** | OpenMP + MKL          |
 | LightGBM      |     0.916 |     0.64 |     3.94 s | Threading             |
 | Random Forest |     0.913 |     0.64 |    21.26 s | Patched (`sklearnex`) |
 | K-NN          |     0.732 |     0.42 |     0.20 s | Vectorised distance   |
 | Logistic Reg. |     0.746 |     0.26 |     0.50 s | DAAL4py accelerated   |
+
 * Speed-up measured against the same code without patch_sklearn() on an Intel® Core™ i7-13700H CPU.
+
 
 ## Pipeline Overview
 Pre-processing – tokenisation, stop-word removal, stemming/lemmatisation
@@ -63,11 +66,12 @@ Visuals – Seaborn class distributions, word clouds
 - **Policy Analysts**: Detect narrative conflicts or agenda shifts
 - **LLM Post-Processing**: Guardrails for hallucinated LLM summaries
 
+
 ## Future Scope
 
 | Idea                                                               | Benefit                            |
 | ------------------------------------------------------------------ | ---------------------------------- |
-| Replace TF-IDF + classical ML with DistilBERT via Optimum-Intel | Modern embeddings + oneAPI kernels |
+| Replace TF-IDF + classical ML with DistilBERT via Optimum-Intel    | Modern embeddings + oneAPI kernels |
 | Apply Intel® Neural Compressor for post-training quantisation      | Smaller/faster models for edge     |
 | Deploy a Flask API on Intel® DevCloud                              | Real-time stance inference demo    |
 
