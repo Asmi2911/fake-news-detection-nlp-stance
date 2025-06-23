@@ -51,7 +51,7 @@ lightgbm xgboost nltk wordcloud jupyterlab -y </pre>
 | K-NN          |     0.732 |     0.42 |     0.20 s | Vectorised distance   |
 | Logistic Reg. |     0.746 |     0.26 |     0.50 s | DAAL4py accelerated   |
 
-* Speed-up measured against the same code without patch_sklearn() on an Intel® Core™ i7-13700H CPU.
+> *Speed-up measured against the same code without patch_sklearn() on an Intel® Core™ i7-13700H CPU.*
 
 
 ## Pipeline Overview
