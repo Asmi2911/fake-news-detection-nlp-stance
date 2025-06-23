@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
 [![Intel](https://img.shields.io/badge/Optimised%20for-Intel®%20CPUs-lightgrey?logo=intel)](https://www.intel.com/content/www/us/en/developer/topic-technology/ai.html)
 
+This project tackles the Fake News Challenge (FNC‑1) stance detection task—i.e., determining whether a headline agrees, disagrees, discusses, or is unrelated to an article body. Intel®‑optimised classical ML models (Logistic Regression, Random Forest, XGBoost, K-NN, LightGBM) are benchmarked for both accuracy and training speed. 
+
 > **Task**&nbsp; &nbsp; Given a headline + article body, classify the stance as  
 > `agree • disagree • discuss • unrelated`.
 
@@ -17,6 +19,14 @@
 | `train_stances.csv` | Ground-truth stance labels |
 | `competition_test_bodies.csv` / `competition_test_stances.csv` | Held-out test split |
 | `scorer.py` | Official FNC-1 scoring script (patched → UTF-8) |
+
+
+## Getting Started
+
+<pre lang="markdown">git clone https://github.com/Asmi2911/fake-news-detection-nlp-stance
+cd fake-news-detection-nlp-stance
+conda activate intel-fake-news
+jupyter lab </pre>
 
 
 ## Environment (Conda)
