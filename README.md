@@ -1,74 +1,59 @@
-# Fake News Detection via NLP-Based Stance Classification
+# Fake-News Stance Detection 
+### Classical ML pipeline • Intel®-Optimised
 
-**A deployable AI system combining semantic NLP, sentiment shifts, and interpretable tree-based models to flag potential misinformation by analyzing headline-article stance alignment.**
+[![Python](https://img.shields.io/badge/Python-3.9-blue?logo=python)](https://python.org)  
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
+[![Intel](https://img.shields.io/badge/Optimised%20for-Intel®%20CPUs-lightgrey?logo=intel)](https://www.intel.com/content/www/us/en/developer/topic-technology/ai.html)
 
-## Project Overview
+> **Task**&nbsp; &nbsp; Given a headline + article body, classify the stance as  
+> `agree • disagree • discuss • unrelated`.
 
-In today's information landscape, distinguishing between legitimate and misleading news is increasingly complex. This project offers a **stance-based fake news detection system** that classifies headline-body pairs as:
-
-- `agree`
-- `disagree`
-- `discuss`
-- `unrelated`
-
-This approach provides **more explainable and granular insight** than simple true/false classification and supports scalable, automated content moderation and policy applications.
-
-## Key AI/NLP Highlights
-
-- **Natural Language Understanding**: Cosine similarity using GloVe and sentence embeddings
-- **Polarity & Emotion Detection**: Captures subjectivity shifts across headline and body
-- **Linguistic Signals**: TF-IDF overlaps, refuting word count, and token mismatch detection
-- **Explainability**: Tree-based models with feature importance make decisions transparent
-- **Lightweight AI Pipeline**: Fast and scalable — ideal for real-time deployment
 
 ## Dataset
 
-- Used [Fake News Challenge (FNC-1)](https://github.com/FakeNewsChallenge/fnc-1) dataset
-- Over 50,000 labeled headline-body pairs
-- Balanced across 4 stance classes
+| File | Description |
+|------|-------------|
+| `train_bodies.csv`  | News body texts (training) |
+| `train_stances.csv` | Ground-truth stance labels |
+| `competition_test_bodies.csv` / `competition_test_stances.csv` | Held-out test split |
+| `scorer.py` | Official FNC-1 scoring script (patched → UTF-8) |
 
-## Tools & Technologies
 
-- **Language**: Python
-- **Libraries**: `scikit-learn`, `XGBoost`, `LightGBM`, `TextBlob`, `NLTK`, `SentenceTransformers`, `Gensim`
-- **NLP Techniques**:
-  - TF-IDF vectorization
-  - Cosine similarity with GloVe & Sentence Transformers
-  - Sentiment analysis using TextBlob
-  - Manual feature engineering for refuting indicators
+## Environment (Conda)
 
-## Methodology
+```bash
+# Create Intel-optimised env
+conda create -n intel-fake-news python=3.9 -y
+conda activate intel-fake-news
 
-### Feature Engineering
-- **Lexical**: TF-IDF, n-gram and token overlap
-- **Semantic**: Sentence-transformer embeddings + cosine similarity
-- **Emotional**: Polarity and subjectivity shifts
-- **Refutation**: Frequency of contradiction keywords like "fake", "fraud", "not"
+# Core libs + Intel® Extension for Scikit-learn
+conda install -c conda-forge \
+      scikit-learn-intelex numpy pandas matplotlib seaborn \
+      lightgbm xgboost nltk wordcloud jupyterlab -y
+The environment ships Intel® oneAPI-powered NumPy / SciPy and the Intel® Extension for Scikit-learn.
 
-### Modeling
-- Evaluated multiple models:
-  - ✅ XGBoost
-  - ✅ LightGBM
-  - Random Forest
-  - Logistic Regression
-  - KNN
+## Results
 
-### Evaluation
-- Metrics: Accuracy, F1-score, ROC-AUC
-- Validation using stratified splits for generalization
-- Confusion matrix and ROC curves plotted for interpretability
+| Model         |  Accuracy | Macro F1 | Train Time | Intel Gain\*          |
+| ------------- | --------: | -------: | ---------: | --------------------- |
+| **XGBoost**   | **0.926** | **0.68** | **5.68 s** | OpenMP + MKL          |
+| LightGBM      |     0.916 |     0.64 |     3.94 s | Threading             |
+| Random Forest |     0.913 |     0.64 |    21.26 s | Patched (`sklearnex`) |
+| K-NN          |     0.732 |     0.42 |     0.20 s | Vectorised distance   |
+| Logistic Reg. |     0.746 |     0.26 |     0.50 s | DAAL4py accelerated   |
+* Speed-up measured against the same code without patch_sklearn() on an Intel® Core™ i7-13700H CPU.
 
-## Performance Summary
+## Pipeline Overview
+Pre-processing – tokenisation, stop-word removal, stemming/lemmatisation
 
-| Model               | Accuracy | AUC    | Highlights                                   |
-|--------------------|----------|--------|----------------------------------------------|
-| **XGBoost**         | **89.0%** | **0.996** | Best generalization & feature explainability |
-| LightGBM           | 86.0%    | —      | Fast inference for real-time filtering       |
-| Random Forest      | 86.3%    | —      | Stable across high variance classes          |
-| Logistic Regression| 80.1%    | —      | Useful baseline model                        |
-| KNN                | 57.8%    | —      | Underperformed due to sparse feature space   |
+Feature Engineering – TF-IDF & CountVectorizer text vectors
 
-> Evaluation visuals (confusion matrix & ROC) included in the notebook.
+Model zoo – LR • RF • KNN • XGBoost • LightGBM (all Intel-ready)
+
+Evaluation – scorer.py (FNC-1) + classification_report
+
+Visuals – Seaborn class distributions, word clouds
+
 
 ## Real-World Applications
 
@@ -80,9 +65,10 @@ This approach provides **more explainable and granular insight** than simple tru
 
 ## Future Scope
 
-- 💡 Integrate **Transformer models (BERT, RoBERTa)** for improved generalization
-- 📊 Apply **SMOTE/Focal Loss** to improve performance on minority classes
-- 🌐 Build an interactive **Streamlit/Hugging Face Spaces demo**
-- 📸 Extend to **multimodal stance detection** (images + text)
+| Idea                                                               | Benefit                            |
+| ------------------------------------------------------------------ | ---------------------------------- |
+| Replace TF-IDF + classical ML with DistilBERT via Optimum-Intel | Modern embeddings + oneAPI kernels |
+| Apply Intel® Neural Compressor for post-training quantisation      | Smaller/faster models for edge     |
+| Deploy a Flask API on Intel® DevCloud                              | Real-time stance inference demo    |
 
 > *This project embodies the core of responsible AI — explainability, scalability, and social relevance in tackling misinformation.*
