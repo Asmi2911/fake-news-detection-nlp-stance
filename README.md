@@ -29,7 +29,7 @@ conda activate intel-fake-news
 # Core libs + Intel® Extension for Scikit-learn
 conda install -c conda-forge \
       scikit-learn-intelex numpy pandas matplotlib seaborn \
-      lightgbm xgboost nltk wordcloud jupyterlab -y
+      lightgbm xgboost nltk wordcloud jupyterlab -y'''
 
 
 ## Results
