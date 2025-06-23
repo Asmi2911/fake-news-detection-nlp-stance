@@ -21,14 +21,14 @@
 
 ## Environment (Conda)
 
-# Create Intel-optimised env
-conda create -n intel-fake-news python=3.9 -y
-conda activate intel-fake-news
+Create Intel-optimised env
+<pre lang="markdown"> ```bash conda create -n intel-fake-news python=3.9 -y
+conda activate intel-fake-news``` </pre>
 
 # Core libs + Intel® Extension for Scikit-learn
-conda install -c conda-forge \
+<pre lang="markdown"> ```bash conda install -c conda-forge \
       scikit-learn-intelex numpy pandas matplotlib seaborn \
-      lightgbm xgboost nltk wordcloud jupyterlab -y'''
+      lightgbm xgboost nltk wordcloud jupyterlab -y``` </pre>
 
 
 ## Results
